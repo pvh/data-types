@@ -1,0 +1,3 @@
+[submodule "themes/remark"]
+	path = themes/remark
+	url = https://github.com/sporto/hugo-remark

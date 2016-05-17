@@ -1,6 +1,7 @@
 +++
 title = "Enums"
 weight = 43
++++
 
 # Enums: What?
 

@@ -1,79 +1,60 @@
 +++
-title = "Better data modeling"
+title = "Extended types in data modeling"
+weight = 40
 +++
 
-# Better data modeling
+# Extended types in data modeling
 ## Introducing some of the more advanced types
 
 ---
+# Email Addresses
 
-# Array
+Everyone has email addresses, here's how you deal with them today.
 
-## Store an array inline in a value
+````sql
+SELECT * FROM users WHERE email LIKE '%@bigcorp.com'
+````
+--
+This is always a full table scan. Sad trombone.
+--
+Using our reverse b-tree trick.
+````sql
+SELECT * FROM users WHERE reverse(email) LIKE reverse('%@bigcorp.com')
+````
+--
+This is... clever, but ugly and hard to dream up.
 
- * actual array data
- * tags / collections
- * GIN indexes work great here
+---
+# `emailaddr`
+## github.com/petere/pgemailaddr
+
+````sql
+SELECT user(email) FROM users WHERE host(email) = 'bigcorp.com'
+````
+Bonus: By default, email addresses are sorted domain/user, so this is fast with no tricks!
+
+---
+# What about URLs? (Or URIs, if you prefer.)
+
+---
+# `uri`
+## github.com/petere/pguri
+--
+
+````sql
+SELECT path(referrer) FROM signups WHERE host = 'interestingblog.com'
+````
 
 ---
 
-# Array cheatsheet
+# Skip the migration!
 
-Make an array.
 ````sql
-SELECT ARRAY[1, 2, 3];
+SELECT 'http://google.com/'::uri
 ````
 
-Make it another way.
 ````sql
-SELECT '{1, 2, 3}'::numeric[];
+SELECT host('http://google.com/'::uri)
 ````
 
-Remember SQL arrays are 1-indexed!
-````sql
-SELECT ('{one, two, three}'::text[])[1]; -- one
-````
-
-Use containment operator to find things.
-````sql
-CREATE INDEX ON table USING gin(tags); -- because fast!
-SELECT * FROM table WHERE tags @> array['sometag'];
-````
-
----
-
-# JSON
-
-## Use `jsonb`, not `json`.
-## Probably add a GIN index.
-## JSON(b) has so many functions
-
----
-
-# Basic json(b)
-
-Input is easy
-````sql
-select '{"a": "b"}'::jsonb
-````
-
-Get to elements with -> and ->>
-````sql
-select attrs->>'presenter_irc_nick' from talks
-pvh
-````
-
-Using a single -> returns the internal JSON, using ->> casts to text.
-````sql
-select attrs->'previous_presentation'->>'location' from talks
-Ottawa
-````
-
-(Compare with -> as the final operator.)
-````sql
-select attrs->'previous_presentation'->'location' from talks
-"Ottawa"
-````
-
-# Searching `jsonb`
 

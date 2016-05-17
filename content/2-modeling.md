@@ -1,18 +1,12 @@
 +++
-
 title = "Basic Data Modeling"
+weight = 2
 +++
 
 # Data Modeling Basics
 ## Covering the fundamentals
+## and frequent fudge-ups
 
----
-
-# A trivial site
-
-Let's simulate a very simple website with users and posts
-
- INSERT A PICTURE HERE
 ---
 
 # A simple `users` row
@@ -48,17 +42,29 @@ Let's simulate a very simple website with users and posts
  * Use `bigserial` or `uuid` for your primary key.*
 
 ---
-# Words, Words, Words
+# Text: What?
 
  * Use `text`
  * Avoid varchar, char, and anything else.
 
 ---
-# Efficient querying
+# Text: Indexes for pattern-matching
 
- * b-tree index supports prefixes (`LIKE 'foo%'`)
- * reversed B-tree supports suffixes
- * `select * from accounts where reverse((owner).email::text) like reverse('%doe.com');`
+An index supports prefixes (`LIKE 'Peter%'`)
+````sql
+CREATE INDEX ON users (name);
+SELECT * FROM accounts WHERE email LIKE 'Peter%';
+````
+
+--
+
+A functional index can support suffix lookups.
+````sql
+CREATE INDEX backsearch ON users (reverse(email));
+SELECT * FROM accounts WHERE reverse(email) LIKE reverse('%doe.com');`
+````
+
+# Other ways to search for text
 
  * regular expressions: ~ (see also, pg_trgm GIN index)
  * tsvectors and GIN will let you look up individual words
@@ -151,7 +157,4 @@ but consider if Postgres is the right solution
  * `varchar`, `char`: use `text`, it's faster
  * `bitstring`: premature optimization
  * `xml`: libxml2 is awful, but...
- * 
-
-## 
 

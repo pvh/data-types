@@ -1,6 +1,6 @@
 <textarea id="source">
-{{ range .Data.Pages.ByTitle }}
-class: center, middle
+{{ range .Data.Pages.ByWeight }}
+class: center, middle, section-heading
 {{ .RawContent }}
 ---
 {{ end }}

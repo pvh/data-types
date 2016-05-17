@@ -1,46 +1,72 @@
 +++
 title = "Data type internals"
+weight = 3
 +++
 
 # Data Type Internals
 ## A simplified guide for users
 
 ---
+# Internals: What's a type?*
 
-# What's a data type (minimally)?
+ * a row in pg_type
+ * a nice name for users to remember
+ * `typename_{in, out}()`
+ * `typename_{send, recv}()`
+ * functions (`host()`, `unnest()`, `average()`)
+ * operators (`<`, `=`, `~`)
 
-## A name
-## A storage format
-## Two functions, `type_{in, out}`
-## maybe `type_{recv, send}`
-## Length / size (fixed or variable)
+---
+# Internals: How does it work?
+
+!!! Diagram?
+
+ * text ('3.14', '{1, 3, 5}') is passed to typename_in().
+ * typename_in() initializes a data structure
+ * Postgres stores that data in a page and later, on disk
 
 ---
 
-# I/O
+# Internals: "Data structure"?
 
- * type_in: text -> internal
- * type_out: internal -> text
- * type_send: internal -> binary
- * type_recv: binary -> internal
+!!! CONSIDER PUTTING A DIAGRAM HERE INSTEAD
 
-# Type Size
-
- * N: a fixed number of bytes
- * -1: varlena (4b of size, then the data itself)
- * -2: null-terminated C-string
+ * Data structures come in fixed size or variable.
+ * Fixed size types: integer, UUID, point.
+ * Variable sizes: text, json, numeric
+ * Variable size a.k.a "varlena" is [4b length, data]
 
 ---
 
-# And?
+# Internals: TOAST
+## (The Outside Attribute Storage Table)
 
-## You probably want some operators and functions
-## like '=', for example.
+Large values are compressed and moved to a special storage location called a TOAST table automatically.
+
+This assumes large values shouldn't be kept with their row anyway.
 
 ---
 
-# A note on driver support
+# Internals: TOAST is great
+
+ * Keeps data rows small, saving I/O on search.
+ * Shrinks large values, saving I/O on retrieval.
+ * Can add cost if retrieving all rows of large data...
+--
+
+ * Try not to do that.
+
+---
+# Internals: Don't get burned by TOAST
+
+## `tsvector` on `text`
+## `GIN` on `tsvector` / `jsonb`
+
+---
+
+# Internals: Binary Protocol
 
 Text drivers use the textual type_out representation.
+
 Binary protocol drivers must reimplement every type.
 

@@ -1,10 +1,10 @@
-@import url(//fonts.googleapis.com/css?family=Abril+Fatface);
+@import url(//fonts.googleapis.com/css?family=Oleo+Script);
 @import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
 @import url(//fonts.googleapis.com/css?family=Nova+Mono:400,700,400italic);
 
 body { font-family: 'Droid Serif'; }
 h1, h2, h3 {
-	font-family: 'Abril Fatface';
+	font-family: 'Oleo Script';
 	font-weight: normal;
 }
 .remark-code, .remark-inline-code {

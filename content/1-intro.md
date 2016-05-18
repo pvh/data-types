@@ -13,17 +13,23 @@ A guided tour
 ### Heroku Postgres
 .center[We run a lot of databases for the internet.]
 
+http://postgres-data-types.pvh.ca/
+
+(If you want a reference or see a bug, let me know!)
+
+@pvh / pvh@pvh.ca
+
 ---
 
 # The Plan
 
- * basic data modeling
+ * a quick review of using basic types
  * how data types work in postgres
- * better data types
+ * advanced data types
  * special-purpose data types
- * DIY types
+ * customizing types
  * community extensions
- * data types we could use
+* types you should write!
 
 ---
 # Caveat Auditor

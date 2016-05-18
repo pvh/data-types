@@ -144,7 +144,14 @@ Top tip: Don't index on booleans. (Consider a partial index.)
 ## `bytea` 
 
 --
-but consider if Postgres is the right solution
+(Do consider if Postgres is the right solution...)
+
+--
+
+Mostly you will leave these alone and treat them as opaque.
+
+
+Handy Exception: SELECT md5(binary_data) FROM table;
 
 ---
 # Types to avoid

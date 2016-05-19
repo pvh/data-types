@@ -1,6 +1,6 @@
 +++
 title = "Data type internals"
-weight = 3
+weight = 30
 +++
 
 # Data Type Internals
@@ -39,7 +39,7 @@ weight = 3
 ---
 
 # Internals: TOAST
-## (The Outside Attribute Storage Table)
+## (The Oversized-Attribute Storage Technique)
 
 Large values are compressed and moved to a special storage location called a TOAST table automatically.
 
@@ -51,7 +51,7 @@ This assumes large values shouldn't be kept with their row anyway.
 
  * Keeps data rows small, saving I/O on search.
  * Shrinks large values, saving I/O on retrieval.
- * Can add cost if retrieving all rows of large data...
+ * Can (maybe?) add cost if searching contents of all rows of large data...
 --
 
  * Try not to do that.
@@ -69,4 +69,6 @@ This assumes large values shouldn't be kept with their row anyway.
 Text drivers use the textual type_out representation.
 
 Binary protocol drivers must reimplement every type.
+
+(This sucks.)
 

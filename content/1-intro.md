@@ -9,15 +9,16 @@ A guided tour
 
 ---
 
+class: center, middle
+
 ## Peter van Hardenberg
 ### Heroku Postgres
-.center[We run a lot of databases for the internet.]
 
 http://postgres-data-types.pvh.ca/
 
 (If you want a reference or see a bug, let me know!)
 
-@pvh / pvh@pvh.ca
+#### @pvh / pvh@pvh.ca
 
 ---
 
@@ -29,7 +30,7 @@ http://postgres-data-types.pvh.ca/
  * special-purpose data types
  * customizing types
  * community extensions
-* types you should write!
+ * types you should write!
 
 ---
 # Caveat Auditor
@@ -45,4 +46,14 @@ http://postgres-data-types.pvh.ca/
  * Avoid operational problems
  * Performance
  * NOT abstract notions of normalization
+
+---
+
+# Goals
+
+ * fix a bad habit or two
+ * encourage you to think beyond pure relational model
+ * provide some intuition around what exists
+ * leave you with a simple reference
+
 

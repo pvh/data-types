@@ -1,6 +1,6 @@
 +++
 title = "Basic Data Modeling"
-weight = 2
+weight = 20
 +++
 
 # Data Modeling Basics
@@ -37,9 +37,33 @@ weight = 2
 # Primary Keys
 
  * Include a primary key.
+ * I don't trust natural keys to last.
 --
 
  * Use `bigserial` or `uuid` for your primary key.*
+
+---
+
+# Primary keys: BIGSERIAL
+
+If your table is small, the extra size won't really matter.
+If your table is big, you're going to need it anyway.
+
+---
+
+# Primary keys: UUID
+
+````sql
+CREATE EXTENSION "uuid-ossp";
+SELECT uuid_generate_v4();
+````
+
+````sql
+CREATE EXTENSION pgcrypto;
+SELECT gen_random_uuid();
+````
+
+(Or create the UUIDs in the client.)
 
 ---
 # Text: What?
@@ -107,25 +131,6 @@ All the days last month (good for joining):
 SELECT generate_series(date_trunc('month', now() - '1 month'::interval),
                        date_trunc('month', now()), '1 day'::interval)
 ````
-
----
-# Time travel: ranges
-
-Users with active accounts on Christmas Day
-````sql
-SELECT * FROM users
-WHERE tstzrange(created_at, deleted_at) @> '2015-12-25'::timestamptz
-````
---
-NULLs count as -/+ infinity time.
-
---
-
-You can also use a single tstzrange column type, but this is less common.
-
---
-
-Top Tip: a GiST index works great here.
 
 ---
 # Boolean values

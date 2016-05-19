@@ -1,6 +1,6 @@
 +++
 title = "DIY Datatypes"
-weight = 6
+weight = 60
 +++
 
 # Do-it-yourself data-types
@@ -10,76 +10,104 @@ weight = 6
 # Domains: What?
 
 Create your own types that constrain existing types.
+
 --
+
  * roll your own email type
  * a more specific URI
+
 --
 NB: SQL wants all types to be null-friendly. Don't restrict NULL away.
 
 ---
 # Domains: When?
 
-## Any time you want consistent logical constraints on a type.
+ * common, stable definitions
+ * zip code
+ * email addresses
+ * NOT postal address
 
 ---
-# Domains: Email Address
+# Domains: Example
 
 ````sql
 CREATE DOMAIN email AS TEXT
 CHECK(
   VALUE ~ '.+\@.+'
 );
+````
+
 --
-NB: A better email address would check other things like length and ASCII.
+(A better email address would check other things like length.)
 
 ---
 
-# Composite Types
+# Composite Types: What?
 
 Create your own types that combine existing types.
 --
+
  * all tables are also types
  * members always go together
  * all members always have the same fields
 
 ---
 
-# Custom functions and operators
+# Composite Types: How? (1/2)
 
-A type without 
+Every row is also a composite type.
 ````sql
-CREATE OR REPLACE FUNCTION host(email) RETURNS text 
-LANGUAGE plpgsql AS $$ 
-BEGIN 
-  return substring($1 from '@(.+)$'); 
-END 
-$$;
-````
---
-# PL/PGSQL is slow!
-
-# PL/V8
-````sql
-CREATE OR REPLACE FUNCTION host(email email) RETURNS text 
-LANGUAGE plv8 AS $$ 
-  return email.split("@")[1]
+SELECT (users) FROM users;
 ````
 
---
-On my machine, 
---
-PL/PGSQL took 10,000ms for 1m rows.
---
-PL/V8 took 2,000ms for 1m rows.
---
-pgemailaddr took 170ms.
+But you can create your own:
+````sql
+CREATE TYPE point3d AS (x float, y float, z float);
+CREATE TABLE threespace (location point3d);
+````
 
 ---
-# Moral of the story?
---
-## If performance counts, use a C extension!
---
-## If it counts a little, prefer PL/V8.
---
-## If you like PL/PGSQL... go ahead?
 
+# Composite Types: How? (2/2)
+
+Referring to a row type (composite type named for table) requires parens
+````sql
+SELECT (users).email FROM users;
+````
+
+Row types are handy in window expressions
+````sql
+SELECT (agent_statuses) AS current, 
+  lead((agent_statuses), 1) OVER (partition by agent_uuid order by time) AS next 
+FROM agent_statuses;
+````
+
+---
+
+# DIY functions
+
+Defining a new function is straightforward
+````sql
+CREATE OR REPLACE FUNCTION host(email) RETURNS text 
+LANGUAGE sql AS $$ 
+  select split_part($1, '@', 2) as return; 
+$$;
+````
+
+--
+
+PL/PGSQL is very slow.
+PL/V8 is relatively fast.
+PL/SQL is quite fast.
+
+---
+# DIY Operators
+
+An operator is any number of non-ASCII characters.
+````sql
+CREATE OPERATOR @-> ( 
+  LEFTARG = 'email', 
+  PROCEDURE = 'host');
+
+SELECT email@-> FROM emails LIMIT 1;
+````

@@ -11,7 +11,7 @@ weight = 42
 # JSON(b): What?
 
 ## "We made a database inside a type." 
-### — Oleg Bartunov
+.right[— Oleg Bartunov]
 
 ---
 
@@ -32,7 +32,14 @@ Hierarchical data.
 {"name": "car",
  "id": 91371
  "parts": [
-   "name": "engine"
+   {
+     "name": "engine"
+     "id": 3241,
+     "parts": [
+       {
+         "name": "crankshaft",
+         "id": 23991,
+         ...
 ````
 (Yea, sure you can self-join.)
 
@@ -41,7 +48,8 @@ Hierarchical data.
 # JSON(b): Why? (3/3)
 
 Everyone generating and using the data expects JSON.
-(Might as well just keep it the same.
+
+(Might as well just keep it the same.)
 
 ---
 
@@ -85,20 +93,23 @@ Particularly if..
 ````
 Performance will suffer and your queries will be more complex.
 
+---
 
 # JSON(b): Construction
 
-Input is easy
+Input is easy.
 ````sql
 select '{"a": "b"}'::jsonb
 ````
 
-Adding members too
+Adding members too.
 ```sql
 UPDATE documents 
   SET contents = content || '{"new_field": "goes here"}' 
   WHERE document_id = 32421;
 ```
+
+---
 
 # JSON(b): Accessing
 
@@ -120,8 +131,11 @@ select attrs->'previous_presentation'->>'location' from talks
 
 Or send a whole path
 ````sql
-SELECT jsonb_extract_path_text(attrs, 'previous_presentation', 'location')
+SELECT jsonb_extract_path_text(attrs, 
+  'previous_presentation', 'location')
 ````
+
+---
 
 # JSON(b): Decomposing
 
@@ -143,6 +157,5 @@ select * from talks where attrs ? 'previous_presentation'
 or documents with a whole sub-document in common.
 ````sql
 SELECT * FROM talks WHERE attrs @> '{"previous_presentation": "PGCon"}'
-
----
+````
 

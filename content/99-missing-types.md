@@ -8,6 +8,27 @@ weight = 95
 
 ---
 
+# Password
+
+A password type could implement best practices.
+
+---
+
+# Currency
+
+Why? Money is not a good type.
+Add support for multiple currencies.
+
+````sql
+
+SELECT justify('$34.03 USD, $12.01 CAD', 
+ 'USD',
+ '{"CAD": 0.77}');
+
+````
+
+---
+
 # Physical Units
 
 ## '77 km/h'::physical
@@ -35,3 +56,20 @@ UPDATE graphs
 ````sql
 SELECT gif_frame(image, 3) FROM gifs WHERE name = 'space-kaboom';
 ````
+
+---
+
+# Music
+
+````sql
+SELECT genre FROM mp3s;
+````
+
+Tags? Sound analysis? Conversion? Other things?
+
+---
+
+# 3d Meshes
+
+Kinematics, morphing?
+

@@ -82,6 +82,8 @@ WITH events_duration AS (
 SELECT * FROM events WHERE range @> now() - '4 hours';
 ````
 
+---
+
 # Ranges: How? (Constraints)
 
 Ranges are also great for exclusion constraints.

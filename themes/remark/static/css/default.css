@@ -2,7 +2,13 @@
 @import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
 @import url(//fonts.googleapis.com/css?family=Nova+Mono:400,700,400italic);
 
+.section-heading {
+  background-color: indigo;
+  color: white;
+}
+
 body { font-family: 'Droid Serif'; }
+
 h1, h2, h3 {
 	font-family: 'Oleo Script';
 	font-weight: normal;
@@ -19,6 +25,3 @@ h1, h2, h3 {
   font-size: 36px;
 }
 
-.section-heading {
-  background-color: indigo;
-  color: white;

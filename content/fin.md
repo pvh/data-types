@@ -7,19 +7,27 @@ weight = 1000
 
 ---
 
-## Data Types are great. Embrace them.
+class: middle
+
+## Data types are great.
 
 ---
+
+class: middle
 
 ## You can start without needing to do migrations.
 
 ---
 
+class: middle
+
 ## Go experiment!
 
 ---
 
-## Go write a cool type, open source it and give a talk at PGCon next year.
+class: middle
+
+## Then write a cool type, open source it and give a talk at PGCon next year.
 
 ---
 

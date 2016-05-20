@@ -42,8 +42,8 @@ http://postgres-data-types.pvh.ca/
 
 ## My priorities
 
- * Query writing convenience
- * Avoid operational problems
+ * Nicer queries
+ * Fewer operational challenges
  * Performance
  * NOT abstract notions of normalization
 

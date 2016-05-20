@@ -84,17 +84,32 @@ WHERE  r.name = 'Roseberry St' AND m.name = 'VICTORIA'
 ````
 
 ---
+# Network addresses
+
+## built-in types
+
+ * cidr
+ * inet
+ * macaddr
+
+## ip4r
+
+https://github.com/RhodiumToad/ip4r
+
+Adds index support for ranges, lighter-weight single IP type.
+(And more.)
+
+---
 # Special mention
 
 ## PostBIS
 Bio-informatic types for DNA querying
 https://colab.mpi-bremen.de/wiki/display/pbis/PostBIS
 
-## IP4R
-Alternate data type for IPv4
-https://github.com/RhodiumToad/ip4r
-
 ## FixedDecimal
 For when you need a fixed-precision decimal (performance)
 https://github.com/2ndQuadrant/fixeddecimal
 
+## HyperLogLog
+Not really a data type, but a data structure for estimating distinct values.
+https://github.com/aggregateknowledge/postgresql-hll

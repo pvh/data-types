@@ -19,8 +19,6 @@ weight = 30
 ---
 # Internals: How does it work?
 
-!!! Diagram?
-
  * text ('3.14', '{1, 3, 5}') is passed to typename_in().
  * typename_in() initializes a data structure
  * Postgres stores that data in a page and later, on disk
@@ -28,8 +26,6 @@ weight = 30
 ---
 
 # Internals: "Data structure"?
-
-!!! CONSIDER PUTTING A DIAGRAM HERE INSTEAD
 
  * Data structures come in fixed size or variable.
  * Fixed size types: integer, UUID, point.

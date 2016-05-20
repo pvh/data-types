@@ -28,13 +28,17 @@ NB: SQL wants all types to be null-friendly. Don't restrict NULL away.
  * NOT postal address
 
 ---
-# Domains: Example
+# Domains: Examples
 
 ````sql
 CREATE DOMAIN email AS TEXT
 CHECK(
   VALUE ~ '.+\@.+'
 );
+````
+
+````sql
+CREATE DOMAIN web_url AS uri CHECK ( (uri_scheme(value) = 'http' OR uri_scheme(value) = 'https')  AND uri_host(value) IS NOT null);
 ````
 
 --

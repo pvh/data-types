@@ -159,12 +159,15 @@ Mostly you will leave these alone and treat them as opaque.
 Handy Exception: SELECT md5(binary_data) FROM table;
 
 ---
-# Types to avoid
+# Don't use
 
  * `money`: generally deprecated
  * `timestamp`: use `timestamptz`
  * `time`: you probably mean `timestamptz`
  * `serial`: use `bigserial`
+
+# Are you sure?
+
  * `float` / `integer`: use `numeric`
  * `varchar`, `char`: use `text`, it's faster
  * `bitstring`: premature optimization

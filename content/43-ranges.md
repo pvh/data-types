@@ -94,5 +94,4 @@ ALTER TABLE reservation ADD CONSTRAINT
   EXCLUDE USING gist(room with =, during with &&)
 ````
 
-# Ranges: How?
 

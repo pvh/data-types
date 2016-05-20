@@ -6,7 +6,9 @@ weight = 50
 # Special-purpose Types
 ---
 
-# Geometric Types
+# Geometry: What?
+
+Postgres has a wide selection of geometry types.
 
  * point
  * line
@@ -15,12 +17,6 @@ weight = 50
  * path
  * polygon
  * circle
-
----
-
-# Geometric: What?
-
-Postgres has a deep selection of geometry types.
 
 ---
 
@@ -34,10 +30,18 @@ Postgres has a deep selection of geometry types.
 
 # Geometry: How?
 
-''''sql
+````sql
 SELECT diameter(circle) FROM circles
   WHERE center(circle) = '(2, 3)'
-''''
+````
+
+---
+
+# Geometry: Why?
+
+ * good for light-weight geometry
+ * not as fast or as feature rich as PostGIS
+ * built in!
 
 ---
 
@@ -45,7 +49,7 @@ SELECT diameter(circle) FROM circles
 
 http://postgis.net
 
-PostGIS is the best way to store and query GIS data.
+PostGIS is the best way to store and query spatial data.
 
 ---
 
@@ -54,7 +58,16 @@ PostGIS is the best way to store and query GIS data.
  * `geom`
  * `geog`
  * index support
- * several GIS libraries
+ * wraps various spatial libraries
+
+---
+
+# PostGIS: Why?
+
+ * geom datatype
+ * better performance
+ * huge amounts of functionality (vector / raster)
+ * not built-in
  
 ---
 
@@ -66,20 +79,22 @@ SELECT
 FROM
   bc_roads r,
   bc_municipality m
-WHERE  r.name = 'Douglas St' AND m.name = 'VICTORIA'
+WHERE  r.name = 'Roseberry St' AND m.name = 'VICTORIA'
   AND ST_Contains(m.the_geom, r.the_geom) ;
 ````
 
 ---
-# PostBIS
+# Special mention
+
+## PostBIS
+Bio-informatic types for DNA querying
 https://colab.mpi-bremen.de/wiki/display/pbis/PostBIS
 
----
-
-# IP4R
+## IP4R
+Alternate data type for IPv4
 https://github.com/RhodiumToad/ip4r
 
----
-# Optimization: FixedDecimal
+## FixedDecimal
+For when you need a fixed-precision decimal (performance)
 https://github.com/2ndQuadrant/fixeddecimal
 

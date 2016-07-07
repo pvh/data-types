@@ -17,14 +17,15 @@ Create your own types that constrain existing types.
  * a more specific URI
 
 --
-NB: SQL wants all types to be null-friendly. Don't restrict NULL away.
+NB: SQL wants all types to be null-friendly. Your domain should allow nulls.
 
 ---
 # Domains: When?
 
- * common, stable definitions
- * zip code
- * email addresses
+ * common, stable specification
+ * postal code
+ * email address
+ * NOT name
  * NOT postal address
 
 ---
@@ -101,10 +102,27 @@ $$;
 --
 
 PL/PGSQL is very slow.
+
 PL/V8 is relatively fast.
+
 PL/SQL is quite fast.
 
 ---
+# DIY Aggregates
+
+Define an initial condition, a per-value function, and a final function (optional).
+````sql
+CREATE AGGREGATE avg (float8)
+(
+    sfunc = float8_accum,
+    stype = float8[],
+    finalfunc = float8_avg,
+    initcond = '{0,0,0}'
+);
+````
+
+---
+
 # DIY Operators
 
 An operator is any number of non-ASCII characters.

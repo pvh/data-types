@@ -3,55 +3,36 @@ title = "Basic Data Modeling"
 weight = 20
 +++
 
-# Data Modeling Basics
-## Covering the fundamentals
-## and frequent fudge-ups
+# Basic data types
+## A very brief review
 
 ---
 
-# A simple `users` row
+# Basic types
 
-````
- id
- name
- email
- created_at
- deleted_at
- is_confirmed
-````
+## surrogate keys
+## text
+## numbers
+## dates and times
 
 ---
+# Keys
 
-# A simple `users` row
-
-````
- id bigserial,
- name text,
- email text,
- created_at timestamptz,
- deleted_at timestamptz,
- is_confirmed bool
-````
-
----
-# Primary Keys
-
- * Include a primary key.
- * I don't trust natural keys to last.
---
-
+ * Include a surrogate key.
+ * Model your natural key via constraints.
  * Use `bigserial` or `uuid` for your primary key.*
 
 ---
 
-# Primary keys: BIGSERIAL
+# Keys: BIGSERIAL
 
-If your table is small, the extra size won't really matter.
+If your table is small, the extra size doesn't matter.
+
 If your table is big, you're going to need it anyway.
 
 ---
 
-# Primary keys: UUID
+# Keys: UUID
 
 ````sql
 CREATE EXTENSION "uuid-ossp";
@@ -66,13 +47,13 @@ SELECT gen_random_uuid();
 (Or create the UUIDs in the client.)
 
 ---
-# Text: What?
+# Text
 
- * Use `text`
- * Avoid varchar, char, and anything else.
+ * Use `text`!
+ * Avoid `varchar`, `char`, and anything else.
 
 ---
-# Text: Indexes for pattern-matching
+# Text: Use indexes for pattern-matching
 
 An index supports prefixes (`LIKE 'Peter%'`)
 ````sql
@@ -88,10 +69,22 @@ CREATE INDEX backsearch ON users (reverse(email));
 SELECT * FROM accounts WHERE reverse(email) LIKE reverse('%doe.com');`
 ````
 
-# Other ways to search for text
+---
 
- * regular expressions: ~ (see also, pg_trgm GIN index)
- * tsvectors and GIN will let you look up individual words
+# Text: Other Searching
+
+A tsvectors with a GIN index will find individual words efficiently
+````sql
+CREATE INDEX ON products USING gin(tsv);
+````
+
+Regular expressions: ~
+````sql
+SELECT * FROM users WHERE name ~ '(John|Jane)\s+Doe';
+```` 
+
+(You can get some index capability via pg_trgm/GIN index)
+
 
 ---
 # Times & Dates
@@ -101,10 +94,10 @@ SELECT * FROM accounts WHERE reverse(email) LIKE reverse('%doe.com');`
 
 --
 ## `date`
-### (Unless you actually want a `date`.)
+### (For when you just need the date.)
 
 ---
-# Time travel: date_trunc()
+# Time functions: date_trunc()
 
 A query that always starts at the beginning of the current week
 ````sql
@@ -135,35 +128,32 @@ SELECT generate_series(date_trunc('month', now() - '1 month'::interval),
 ---
 # Boolean values
 
-## use `bool`, not `bit`
-
-They work as you'd expect.
+## Use `bool`, not `bit`
 
 --
 
-Top tip: Don't index on booleans. (Consider a partial index.)
+Tip: Don't index on booleans. (Consider a partial index.)
 
 ---
 # Binary data
 
 ## `bytea` 
 
---
 (Do consider if Postgres is the right solution...)
-
---
 
 Mostly you will leave these alone and treat them as opaque.
 
-
-Handy Exception: SELECT md5(binary_data) FROM table;
+Handy Exception: 
+````sql
+SELECT md5(binary_data) FROM table;
+````
 
 ---
 # Don't use
 
- * `money`: generally deprecated
+ * `money`: not up to modern standards
  * `timestamp`: use `timestamptz`
- * `time`: you probably mean `timestamptz`
+ * `time`: you probably meant `timestamptz`
  * `serial`: use `bigserial`
 
 # Are you sure?
@@ -172,4 +162,6 @@ Handy Exception: SELECT md5(binary_data) FROM table;
  * `varchar`, `char`: use `text`, it's faster
  * `bitstring`: premature optimization
  * `xml`: libxml2 is awful, but...
+ * `json`: you probably want jsonb 
+
 

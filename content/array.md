@@ -16,13 +16,12 @@ In a value.
 --
 It's not really rocket science.
 
----
+--
 
-# Array: Why?
+Useful for:
  * actual array data
  * tags / collections
  * on-the-fly aggregation in query results
- * GIN indexes are great here
 
 ---
 
@@ -46,8 +45,11 @@ SELECT ARRAY[1,2] || ARRAY[3, 4];
 
 Aggregate from records.
 ````sql
-SELECT array_agg(distinct users) from events where name = 'PGCon';
+SELECT array_agg(distinct users) from events where name = 'PGDay.RU';
 ````
+
+--
+You can make N-dimensional arrays too.
 
 ---
 
@@ -63,4 +65,4 @@ Use containment operator to find things.
 CREATE INDEX ON table USING gin(tags); -- because fast!
 SELECT * FROM table WHERE tags @> array['sometag'];
 ````
-
+(GIN indexes are great here)

@@ -23,11 +23,9 @@ Fast, transparent mapping of words to integers.
 
 # Enums: Why?
 
-Some datasets have huge numbers of similar labels.
+Enums provide a limited set of labels.
 
-Storing them as enums can reduce storage and improve performance.
-
-It also restricts what labels can be written.
+Storage is quite efficient - enums are stored as numbers.
 
 ---
 
@@ -42,12 +40,12 @@ CREATE TYPE server_states AS
 --
 You can treat them like their text values.
 ````sql
-INSERT INTO servers(state) VALUES ('mystery');
+INSERT INTO servers(state) VALUES ('offline');
 ````
 
 --
 
-They'll block illegal values.
+Enums block unexpected values from insertion.
 ````sql
 INSERT INTO servers(state) VALUES ('mystery');
 ERROR:  invalid input value for enum server_states: "mystery"

@@ -3,31 +3,26 @@ title = "fin"
 weight = 1000
 +++
 
-# We made it!
+# phew!
+# we made it
 
 ---
 
-class: middle
+## Basic data types to use
 
-## Data types are great.
+`text`, `timestamptz`, `bigserial`/`uuid`
 
----
+## Advanced types to use
 
-class: middle
+`jsonb`, `array`, `tstzrange`/`numrange`
 
-## You can start without needing to do migrations.
+## Create your own
 
----
+Domains, composite types, functions, operators, aggregates.
 
-class: middle
+## Community extensions
 
-## Go experiment!
-
----
-
-class: middle
-
-## Then write a cool type, open source it and give a talk at PGCon next year.
+PostGIS, ip4r, email, uri, pgxn
 
 ---
 
@@ -39,6 +34,5 @@ class: section-heading, center, middle
 
 ## @pvh / pvh@pvh.ca
 
-### Feedback is welcome and invited!
-https://goo.gl/rhzaip
+Feedback is welcome and invited!
 

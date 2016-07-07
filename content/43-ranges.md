@@ -23,38 +23,43 @@ Always has upper / lower, inclusive / exclusive bounds.
 
 ## Nothing lasts forever
 
----
+--
 
-# Ranges: Why?
-
- * operators
+Benefits include: 
+ * operators for querying
  * exclusion constraints
- * performance
 
 ---
 
 # Ranges: Why?
 
-Useful prebuilt ranges
+Some useful predefined range types:
 
  * numrange
  * tstzrange
  * daterange
 
+Or define your own:
+````sql
+CREATE TYPE inetrange AS RANGE (
+    SUBTYPE = inet
+); 
+````
 ---
 
 # Ranges: How? (Basics)
 
+Ranges can be created mid-query.
 ````sql
 SELECT tstzrange(created_at, deleted_at) FROM users;
 ````
 
 --
-NULLs count as -/+ infinity time.
+(NULLs are helpfully treated as -/+ infinity.)
 
 --
 
-Users with active accounts on Christmas Day
+Find users with active accounts on Christmas Day
 ````sql
 SELECT * FROM users
 WHERE tstzrange(created_at, deleted_at) @> '2015-12-25'::timestamptz
@@ -73,9 +78,11 @@ CREATE INDEX ON users USING GIST( tstzrange(created_at, deleted_at) );
 Understand how events unfold...
 ````sql
 WITH events_duration AS (
-  SELECT tstzrange(
-    at_time,
-    lead(at_time, 1) OVER (partition by event_source order by at_time)) as range,
+  SELECT 
+    tstzrange(
+      at_time,
+      lead(at_time, 1) OVER (partition by event_source order by at_time)
+    ) as range,
     *
   FROM events
 )

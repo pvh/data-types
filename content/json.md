@@ -15,7 +15,7 @@ weight = 42
 
 ---
 
-# JSON(b): Why? (1/3)
+# JSON(b): When? (1/3)
 
 Convenient short-lived or occasional attribute storage.
 ````sql
@@ -25,7 +25,7 @@ Convenient short-lived or occasional attribute storage.
 
 ---
 
-# JSON(b): Why? (2/3)
+# JSON(b): When? (2/3)
 
 Hierarchical data.
 ````json
@@ -41,15 +41,14 @@ Hierarchical data.
          "id": 23991,
          ...
 ````
-(Yea, sure you can self-join.)
 
 ---
 
-# JSON(b): Why? (3/3)
+# JSON(b): When? (3/3)
 
-Everyone generating and using the data expects JSON.
+The data is already JSON. 
 
-(Might as well just keep it the same.)
+Why pull it apart?
 
 ---
 

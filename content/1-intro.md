@@ -4,8 +4,8 @@ weight = 1
 title = "An Overview"
 +++
 
-# Data Types in PostgreSQL
-A guided tour
+# Understanding the power of data types
+## PostgreSQL's Secret Weapon
 
 ---
 
@@ -22,38 +22,27 @@ http://postgres-data-types.pvh.ca/
 
 ---
 
-# The Plan
+class: center, middle
 
- * a quick review of using basic types
- * how data types work in postgres
- * advanced data types
- * special-purpose data types
- * customizing types
- * community extensions
- * types you should write!
+# Types are incredibly powerful.
+# &nbsp;
+# *Start using them today.*
+
+---
+
+# Programme
+
+ * Basic data types
+ * Type internals (for users)
+ * Advanced data types
+ * Special-purpose data types
+ * Customizing types
+ * Community extensions
+ * Missing types
 
 ---
 # Caveat Auditor
 
 ## "The root of all evil is premature optimization."
 .right[— Knuth]
-
---
-
-## My priorities
-
- * Nicer queries
- * Fewer operational challenges
- * Performance
- * NOT abstract notions of normalization
-
----
-
-# Goals
-
- * fix a bad habit or two
- * encourage you to think beyond pure relational model
- * provide some intuition around what exists
- * leave you with a simple reference
-
 

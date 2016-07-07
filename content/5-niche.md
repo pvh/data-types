@@ -88,28 +88,40 @@ WHERE  r.name = 'Roseberry St' AND m.name = 'VICTORIA'
 
 ## built-in types
 
- * cidr
- * inet
- * macaddr
+ * inet (`192.168.0.100`)
+ * cidr (`::ffff:1.2.3.0/120`)
+ * macaddr (`08:00:2b:01:02:03`)
 
 ## ip4r
 
 https://github.com/RhodiumToad/ip4r
 
 Adds index support for ranges, lighter-weight single IP type.
-(And more.)
+(And lots more.)
 
 ---
 # Special mention
 
 ## PostBIS
 Bio-informatic types for DNA querying
+
 https://colab.mpi-bremen.de/wiki/display/pbis/PostBIS
+
+## pg_currency
+Very stale (6 years) but a solid foundation!
+
+https://github.com/samv/pg-currency
+
+---
+# Special mention
 
 ## FixedDecimal
 For when you need a fixed-precision decimal (performance)
+
 https://github.com/2ndQuadrant/fixeddecimal
 
 ## HyperLogLog
 Not really a data type, but a data structure for estimating distinct values.
+
 https://github.com/aggregateknowledge/postgresql-hll
+

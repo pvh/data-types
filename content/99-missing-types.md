@@ -8,16 +8,9 @@ weight = 95
 
 ---
 
-# Password
-
-A password type could implement best practices.
-
----
-
 # Currency
 
-Why? Money is not a good type.
-Add support for multiple currencies.
+`money` is not a good type, and we can do better.
 
 ````sql
 
@@ -31,19 +24,14 @@ SELECT justify('$34.03 USD, $12.01 CAD',
 
 # Physical Units
 
-## '77 km/h'::physical
-## '542 fluid ounces'::physical
+Postgres users don't crash rovers into Mars. 
 
---
-Why?
+````sql
+SELECT '77 km/h'::physical
+SELECT to_unit('ml', '542 fluid ounces'::physical);
+SELECT '4 m/s'::physical + '1 ounce'::physical; -- error
+````
 
---
-
-So that Postgres users don't crash rovers into Mars. 
-
---
-
-Also, because different countries use different units and why not have your database take care of that?
 ---
 
 # Images
@@ -57,19 +45,18 @@ UPDATE graphs
 SELECT gif_frame(image, 3) FROM gifs WHERE name = 'space-kaboom';
 ````
 
+Image classification, sorting, organizing, resampling, and so on in-DB could be useful.
+
 ---
 
-# Music
+# Music / Sound / Tags
 
 ````sql
 SELECT genre FROM mp3s;
+SELECT max(sound_length(sound)) FROM samples;
 ````
 
-Tags? Sound analysis? Conversion? Other things?
+Could be great for people with large music collections, DJs, researchers.
 
----
-
-# 3d Meshes
-
-Kinematics, morphing?
+Consider building on taglib?
 

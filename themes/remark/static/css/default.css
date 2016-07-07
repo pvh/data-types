@@ -1,6 +1,6 @@
-@import url(//fonts.googleapis.com/css?family=Oleo+Script);
+@import url(//fonts.googleapis.com/css?family=Questrial);
 @import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-@import url(//fonts.googleapis.com/css?family=Nova+Mono:400,700,400italic);
+@import url(//fonts.googleapis.com/css?family=Share+Tech+Mono:400,700,400italic);
 
 .section-heading {
   background-color: indigo;
@@ -10,11 +10,11 @@
 body { font-family: 'Droid Serif'; }
 
 h1, h2, h3 {
-	font-family: 'Oleo Script';
+	font-family: 'Questrial';
 	font-weight: normal;
 }
 .remark-code, .remark-inline-code {
-	font-family: 'Nova Mono';
+	font-family: 'Share Tech Mono';
 }
 .remark-slide-content h1{
 	font-size: 48px;

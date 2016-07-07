@@ -28,6 +28,12 @@ weight = 30
  * C language functions operate on this format
 
 ---
+# Internals
+
+<img width=220 src="tuple.png"/>
+<img width=500 src="page.png"/>
+
+---
 
 # Internals: TOAST
 ## (The Oversized-Attribute Storage Technique)

@@ -11,7 +11,7 @@ title = "An Overview"
 
 class: center, middle
 
-## Peter van Hardenberg
+# Peter van Hardenberg
 ### Heroku Postgres
 
 http://postgres-data-types.pvh.ca/
@@ -19,14 +19,6 @@ http://postgres-data-types.pvh.ca/
 (If you want a reference or see a bug, let me know!)
 
 #### @pvh / pvh@pvh.ca
-
----
-
-class: center, middle
-
-# Types are incredibly powerful.
-# &nbsp;
-# *Start using them today.*
 
 ---
 
@@ -41,6 +33,20 @@ class: center, middle
  * Missing types
 
 ---
+
+class: center, middle
+
+# Why use data types?
+
+## Make queries simpler and more readable.
+
+## Solve problems elegantly and in the database.
+
+## Performance and space efficiency.
+
+
+---
+
 # Caveat Auditor
 
 ## "The root of all evil is premature optimization."

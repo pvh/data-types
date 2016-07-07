@@ -1,6 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Questrial);
-@import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-@import url(//fonts.googleapis.com/css?family=Share+Tech+Mono:400,700,400italic);
+@import url(//fonts.googleapis.com/css?family=Questrial|Droid+Serif:400,700,400italic|Source+Code+Pro:400,700,400italic);
 
 .section-heading {
   background-color: indigo;
@@ -14,7 +12,7 @@ h1, h2, h3 {
 	font-weight: normal;
 }
 .remark-code, .remark-inline-code {
-	font-family: 'Share Tech Mono';
+	font-family: 'Source Code Pro';
 }
 .remark-slide-content h1{
 	font-size: 48px;

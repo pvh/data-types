@@ -36,3 +36,4 @@ class: section-heading, center, middle
 
 Feedback is welcome and invited!
 
+thanks to: peter eisentraut, jim mlodgenski, jonathan katz, bruce momjian, josh berkus, will leinweber, rachid belaid

@@ -10,7 +10,7 @@ weight = 40
 
 class: center
 
-# Postgres advanced types greatest hits
+# Advanced types greatest hits
 
 ## `array`
 ## `jsonb`

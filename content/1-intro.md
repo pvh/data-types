@@ -12,7 +12,6 @@ title = "An Overview"
 class: center, middle
 
 # Peter van Hardenberg
-### Heroku Postgres
 
 http://postgres-data-types.pvh.ca/
 

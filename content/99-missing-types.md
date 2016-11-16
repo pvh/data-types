@@ -21,19 +21,6 @@ SELECT justify('$34.03 USD, $12.01 CAD',
 ````
 
 ---
-
-# Physical Units
-
-Postgres users don't crash rovers into Mars. 
-
-````sql
-SELECT '77 km/h'::physical
-SELECT to_unit('ml', '542 fluid ounces'::physical);
-SELECT '4 m/s'::physical + '1 ounce'::physical; -- error
-````
-
----
-
 # Images
 
 ````sql

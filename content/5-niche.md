@@ -99,6 +99,27 @@ https://github.com/RhodiumToad/ip4r
 Adds index support for ranges, lighter-weight single IP type.
 (And lots more.)
 
+
+---
+# Physical Units
+
+https://github.com/ChristophBerg/postgresql-unit
+
+New and exciting!
+
+````sql
+# SELECT '800 m'::unit + '500 m' AS length;
+ length
+--------
+ 1.3 km
+
+# SELECT '9.81 N'::unit / 'kg' AS gravity;
+  gravity
+------------
+ 9.81 m/s^2
+
+````
+
 ---
 # Special mention
 

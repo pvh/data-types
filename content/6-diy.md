@@ -46,7 +46,13 @@ CREATE DOMAIN web_url AS uri CHECK ( (uri_scheme(value) = 'http' OR uri_scheme(v
 (A better email address would check other things like length.)
 
 ---
+# Domains & Arrays
 
+Domains aren't compatible with arrays.
+
+This is because arrays require a separate array type, which is not created when the domain is created.
+
+---
 # Composite Types: What?
 
 Create your own types that combine existing types.

@@ -96,6 +96,9 @@ SELECT * FROM users WHERE name ~ '(John|Jane)\s+Doe';
 ## `date`
 ### (For when you just need the date.)
 
+## `time`
+### (For when you only want a time-of-day.)
+
 ---
 # Time functions: date_trunc()
 
